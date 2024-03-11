@@ -1,0 +1,162 @@
+* {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.page {
+  display: grid;
+  grid-template-rows: 50px 1fr 30px;
+  min-height: 100vh;
+}
+
+header {
+  background-color: rgb(155, 21, 59);
+  display: grid;
+  place-content: start;
+  padding: 0 15px;
+  height: 9vh;
+  display: flex;
+  align-items: center;
+  font-size: 150%;
+  justify-content: space-between;
+}
+
+header a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+}
+
+section {
+  margin-right: 30px;
+
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+  font-size: 1.5rem;
+  flex-direction: column;
+  width: 18vw;
+  height: 100%;
+  padding-top: 30px;
+  border-right: 1px solid rgb(155, 21, 59);
+}
+
+.nav a {
+  text-decoration: none;
+  text-align: center;
+  color: brown;
+  align-items: center;
+}
+
+.nav_item {
+  padding: 5px;
+  padding-left: 20px;
+}
+
+/* .nav a.active {
+  background-color: rgb(155, 21, 59);
+  color: white;
+} */
+
+.tasks_header {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  /* place-content: end; */
+}
+
+.inpSearch{
+  height: 20%;
+  width: 20%;
+}
+
+.div_sort {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 15px;
+}
+
+.selectList {
+  border: none;
+  text-align: center;
+  font-size: medium;
+}
+
+.tasksList {
+  display: flex;
+  flex-direction: column;
+}
+
+.tasksList h1{
+  border-bottom: rgb(155, 21, 59) 1px solid;
+  padding: 10px;
+  /* text-align: center; */
+  margin: 0;
+}
+
+.btnAddNewTask {
+  background-color: rgb(155, 21, 59);
+  border: white 1px solid;
+  box-shadow: 3px 2px 4px grey;
+  width: 12%;
+  height: 30px;
+  border-radius: 40px;
+  cursor: pointer;
+}
+
+.task_item {
+  border-bottom: rgb(155, 21, 59) 1px solid;
+  width: 70vw;
+  padding: 20px;
+}
+
+.div_buttons {
+  display: flex;
+}
+
+.btn_delete,
+.btn_edit,
+.btn_complete {
+  flex-direction: column;
+  /* background-color: rgb(155, 21, 59);
+  color: white; */
+  background-color: white;
+  color: rgb(155, 21, 59);
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.btn_delete:hover,
+.btn_edit:hover,
+.btn_complete:hover {
+  cursor: pointer;
+  color: rgb(26, 25, 25);
+  background-color: rgb(155, 21, 59);
+  color: white;
+}
+
+.btn_complete{
+  font-size: medium;
+  gap: 5px;
+}
