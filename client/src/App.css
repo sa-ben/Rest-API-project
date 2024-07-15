@@ -16,7 +16,7 @@ body {
 header {
   background-color: rgb(155, 21, 59);
   display: grid;
-  place-content: start;
+  place-content: flex-start;
   padding: 0 15px;
   height: 9vh;
   display: flex;
@@ -129,7 +129,8 @@ section {
 
 .btn_delete,
 .btn_edit,
-.btn_complete {
+.btn_complete, 
+.btn_completed {
   flex-direction: column;
   /* background-color: rgb(155, 21, 59);
   color: white; */
@@ -156,7 +157,8 @@ section {
   color: white;
 }
 
-.btn_complete{
+.btn_complete,
+.btn_completed {
   font-size: medium;
   gap: 5px;
 }

@@ -1,6 +1,5 @@
 import Axios from "axios";
-import { MdDeleteOutline, MdDelete, MdOutlineEdit, MdOutlineTaskAlt } from "react-icons/md";
-
+import { MdDelete, MdOutlineEdit, MdOutlineTaskAlt } from "react-icons/md";
 
 const TaskItem = ({ task, fetchTasks, sortBy, sortTasks }) => {
 
@@ -13,21 +12,34 @@ const TaskItem = ({ task, fetchTasks, sortBy, sortTasks }) => {
         console.log(responseData);
     }
 
-    // const completeTask = async () =>{
-    //     const {data} = await Axios.put(`http://localhost:5600/api/tasks/${task._id}`, {complete: !complete})
-    //     fetchTasks()
-    //     sortTasks("alphabeta")
-    // }
+    const completeTask = async () => {
+        try {
+            const { data } = await Axios.put(`http://localhost:5600/api/tasks/${task._id}`, { ...task, complete: !task.complete })
+            fetchTasks()
+            sortTasks("alphabeta")
+            console.log(data)
+        } catch (error) {
+            console.error("Error updating task:", error)
+        }
+    };
+
 
     return <div className="task_item">
-        <h2> {task.title} </h2> <p>{task._id}</p>
+        <h2> {task.title} </h2>
+        <h5> {task.description} </h5>
+        <p> id: {task._id}</p>
+        <p> {task.complete ? 'completed' : 'awaiting'} </p>
         <div className="div_buttons">
-            <button className="btn_complete" title="completed task" onClick={() => { task.complete = !task.complete; fetchTasks() }} ><MdOutlineTaskAlt /> {task.complete && "comleted"} </button>
-            <button onClick={deleteTask} className="btn_delete" title="delete task" ><MdDelete /> </button>
-            <button className="btn_edit" title="edit task" ><MdOutlineEdit /> </button>
+            <button className={task.complete? "btn_completed" : "btn_complete"} title="complete task" onClick={completeTask} disabled={task.complete}>
+                <MdOutlineTaskAlt /> {task.complete && "completed"}
+            </button>
+            <button className="btn_delete" title="delete task" onClick={deleteTask}>
+                <MdDelete />
+            </button>
+            <button className="btn_edit" title="edit task">
+                <MdOutlineEdit />
+            </button>
         </div>
-        {/* onClick={editTask} 
-onClick={completeTask}*/}
     </div>
 }
 

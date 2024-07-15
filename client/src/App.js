@@ -10,7 +10,12 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={<Layout />}>
-            <Route index element={<h1>Home page</h1>} />
+            <Route index element={<h1> Home page </h1>} />
+            {/* welcome {user}
+            your recent enter was at {}
+            you have {} tasks waiting for done
+            you have {} photos and {} posts at your library
+            enjoy connecting! */}
             <Route path='/tasks' element={<TaskList />} />
             <Route path='/tasks/add' element={<AddTask />} />
           </Route>

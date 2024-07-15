@@ -9,7 +9,7 @@ router.get("/:id", taskController.getTaskById)
 //create task
 router.post("/",taskController.createTask)
 //update task
-router.put("/", taskController.updateTask)
+router.put("/:id", taskController.updateTask)
 //delete task
 router.delete("/", taskController.deleteTask)
 
