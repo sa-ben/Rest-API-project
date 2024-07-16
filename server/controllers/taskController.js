@@ -14,16 +14,16 @@ const getTaskById = async (req, res) => {
 }
 
 const createTask = async (req, res) => {
-    const { title, description, tags, complete } = req.body
+    const { title, description, tags, complete, dueDate } = req.body
     if (!title) return res.status(404).json({ message: 'title is required' })
-    const task = await Task.create({ title, description, tags,  complete })
+    const task = await Task.create({ title, description, tags,  complete, dueDate })
     if (task) return res.status(201).json(task)
     else res.status(400).json({ message: 'Invalid task' })
 }
 
 const updateTask = async (req, res) => {
     const { id } = req.params
-    const { title, description, tags, complete } = req.body
+    const { title, description, tags, complete, dueDate } = req.body
     if (!id || !title) return res.status(400).json({ message: 'fields are required' })
     const task = await Task.findById(id).exec()
     if (!task) return res.status(400).json({ message: 'Task no found' })
@@ -31,6 +31,7 @@ const updateTask = async (req, res) => {
     task.description = description
     task.tags = tags
     task.complete = complete
+    task.dueDate = dueDate
 
     const updatedTask = await task.save()
     res.json(`${updatedTask.title} updated`)

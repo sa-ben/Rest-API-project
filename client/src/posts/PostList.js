@@ -50,7 +50,6 @@ const PostList = () => {
         <div className="postsList">
             <div className="posts_header">
                 <div className="div_sort">
-                    <FiFilter style={{ height: "80px" }} />
                     <select className="selectList" onChange={(e) => setSortBy(e.target.value)}>
                         <option value="id"> id </option>
                         <option value="alphabeta"> a-z </option>
@@ -58,10 +57,9 @@ const PostList = () => {
                     </select>
                 </div>
                 <input className="inpSearch" placeholder="search" onChange={(e) => setFilterValue(e.target.value)} />
-                <button className="btnAddNew"> <Link style={{ color: "white" }} to='/posts/add'> Add new post </Link> </button>
+                <button className="btnAddNew"> <Link className="linkBtn" to='/posts/add'> Add new post </Link> </button>
             </div>
             <h1> Posts List </h1>
-            {/* <Link to='/posts/add'> Add new post</Link> */}
             {(posts.length) ?
                 posts.map((post, index) => <PostItem key={post._id} post={post} fetchPosts={fetchPosts} sortBy={sortBy} sortPosts={sortPosts} />)
                 : <h2> No posts found </h2>

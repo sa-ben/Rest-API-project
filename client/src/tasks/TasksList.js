@@ -2,13 +2,17 @@ import { useEffect, useState } from "react"
 import Axios from 'axios'
 import { Link } from 'react-router-dom'
 import TaskItem from "./TaskItem"
-import { FiFilter } from "react-icons/fi";
-
+import AddTask from "./AddTask"
 
 const TasksList = () => {
+
+    const [openModal, setOpenModal] = useState(false)
     const [tasks, setTasks] = useState([])
     const [sortBy, setSortBy] = useState('')
     const [filterValue, setFilterValue] = useState('')
+
+    const handleOpen = () => setOpenModal(true)
+    const handleClose = () => setOpenModal(false)
 
     const fetchTasks = async () => {
         try {
@@ -27,21 +31,26 @@ const TasksList = () => {
     const sortTasks = (sortBy) => {
         switch (sortBy) {
             case "alphabeta":
-                tasks.sort((a, b) => a.title.localeCompare(b.title))
+                tasks.sort((a, b) => a.title.localeCompare(b.title));
                 break;
-            case "completed": // הצג לי את המשימות שלא בוצעו תחילה
-                tasks.sort(el => !el.complete)
+            case "completed":
+                tasks.sort((a, b) => (a.complete === b.complete) ? 0 : a.complete ? 1 : -1);
                 break;
             case "random":
-                tasks.sort(() => Math.random() - 0.5)
+                tasks.sort(() => Math.random() - 0.5);
+                break;
+            case "date":
+                tasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
                 break;
             default:
-                tasks.sort((a, b) => a._id.localeCompare(b._id))
+                tasks.sort((a, b) => a._id.localeCompare(b._id));
                 break;
         }
         console.log(`sorted by ${sortBy} successfully`);
         setTasks([...tasks]);
-    }
+    };
+    
+
 
     useEffect(() => {
         sortTasks(sortBy)
@@ -53,23 +62,24 @@ const TasksList = () => {
         <div className="tasksList">
             <div className="tasks_header">
                 <div className="div_sort">
-                    <FiFilter style={{ height: "80px" }} />
                     <select className="selectList" onChange={(e) => setSortBy(e.target.value)}>
                         <option value="id"> id </option>
                         <option value="alphabeta"> a-z </option>
                         <option value="completed"> completed </option>
                         <option value="random"> random </option>
+                        <option value="date"> date </option>
                     </select>
                 </div>
                 <input className="inpSearch" placeholder="search" onChange={(e) => setFilterValue(e.target.value)} />
-                <button className="btnAddNew"> <Link style={{ color: "white" }} to='/tasks/add'> Add new task</Link> </button>
+                <button className="btnAddNew"> <Link className="linkBtn" to='/tasks/add'> Add new task</Link> </button>
+                {/* <button className="btnAddNew" onClick={handleOpen}> Add new task </button> */}
             </div>
             <h1> Tasks List </h1>
-            {/* <Link to='/tasks/add'> Add new task</Link> */}
             {(tasks.length) ?
                 tasks.map((task, index) => <TaskItem key={task._id} task={task} fetchTasks={fetchTasks} sortBy={sortBy} sortTasks={sortTasks} />)
                 : <h2> No tasks found </h2>
             }
+            {/* <AddTask isOpen={openModal} onClose={handleClose} />  */}
         </div>
     </>
 }

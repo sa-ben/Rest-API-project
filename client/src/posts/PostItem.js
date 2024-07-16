@@ -40,6 +40,7 @@ const PostItem = ({ post, fetchPosts }) => {
     };
 
     return <div className="post_item">
+        <p className="p_id"> id: {post._id}</p>
         <h2> {post.title} </h2>
         <p> {post.body}</p>
         <div className="div_buttons">

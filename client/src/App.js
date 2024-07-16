@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import TaskList from './tasks/TaskList';
+import TaskList from './tasks/TasksList';
 import AddTask from './tasks/AddTask';
 import Layout from './common/Layout';
 import PostList from './posts/PostList';
