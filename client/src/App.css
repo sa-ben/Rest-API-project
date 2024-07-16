@@ -59,22 +59,37 @@ section {
   align-items: center;
 }
 
+.nav a :hover{
+  font-weight: bold;
+}
+
 .nav_item {
   padding: 5px;
   padding-left: 20px;
 }
 
-/* .nav a.active {
-  background-color: rgb(155, 21, 59);
-  color: white;
-} */
+.nav_item:hover {
+  /* border-bottom: 5px rgb(155, 21, 59) solid; */
+  font-weight: bold;
+  cursor: pointer;
+  font-size: large;
+}
 
-.tasks_header {
+.nav_item.active{
+    font-weight: bold;
+
+}
+
+.nav_item .active {
+  font-weight: bold;
+}
+
+.tasks_header,
+.posts_header {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
   align-items: center;
-  /* place-content: end; */
 }
 
 .inpSearch{
@@ -95,19 +110,21 @@ section {
   font-size: medium;
 }
 
-.tasksList {
+.tasksList,
+.postsList {
   display: flex;
   flex-direction: column;
 }
 
-.tasksList h1{
+.tasksList h1,
+.postsList h1{
   border-bottom: rgb(155, 21, 59) 1px solid;
   padding: 10px;
   /* text-align: center; */
   margin: 0;
 }
 
-.btnAddNewTask {
+.btnAddNew {
   background-color: rgb(155, 21, 59);
   border: white 1px solid;
   box-shadow: 3px 2px 4px grey;
@@ -117,7 +134,8 @@ section {
   cursor: pointer;
 }
 
-.task_item {
+.task_item,
+.post_item {
   border-bottom: rgb(155, 21, 59) 1px solid;
   width: 70vw;
   padding: 20px;

@@ -9,7 +9,7 @@ router.get('/', photoController.getAllPhotos)
 //get photo by id
 router.get('/:id', photoController.getPhotoById)
 //update a photo
-router.put('/', photoController.updatePhoto)
+router.put('/:id', photoController.updatePhoto)
 //delete a photo
 router.delete('/', photoController.deletePhoto)
 

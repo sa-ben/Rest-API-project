@@ -21,7 +21,8 @@ const createPost = async (req, res) => {
 }
 
 const updatePost = async (req, res) => {
-    const { id, title, body } = req.body
+    const { id } = req.params
+    const { title, body } = req.body
     if (!id || !title || !body) return res.status(400).send("id and other fields are required")
     const post = await Post.findById(id).exec()
     post.title = title

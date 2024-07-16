@@ -21,7 +21,8 @@ const createPhoto = async (req, res) => {
 }
 
 const updatePhoto = async (req, res) => {
-    const { id, title, imageUrl } = req.body
+    const { id } = req.params
+    const { title, imageUrl } = req.body
     if (!id || !title || !imageUrl) return res.status(400).send("id and other fields are required")
     const photo = await Photo.findById(id).exec()
     post.title = title

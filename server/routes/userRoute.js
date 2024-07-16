@@ -9,7 +9,7 @@ router.get('/', userController.getAllUsers)
 //get user by id
 router.get('/:id', userController.getUserById)
 //update a user
-router.put('/', userController.updateUser)
+router.put('/:id', userController.updateUser)
 //delete a user
 router.delete('/',userController.deleteUser)
 

@@ -2,14 +2,14 @@ import React from 'react';
 import Modal from '@mui/material/Modal';
 import { Box, Button, TextField, Typography } from '@mui/material';
 
-const UpdateTask = ({ isOpen, onClose, editedTitle, editedDescription, editedComplete, onTitleChange, onDescriptionChange, onCompleteChange, onSaveChanges }) => {
+const UpdatePost = ({ isOpen, onClose, editedTitle, editedBody, onTitleChange, onBodyChange, onSaveChanges }) => {
 
     return (
         <Modal
             open={isOpen}
             onClose={onClose}
             aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
+            aria-describedby="modal-modal-body"
         >
             <Box sx={{
                 position: 'absolute',
@@ -23,7 +23,7 @@ const UpdateTask = ({ isOpen, onClose, editedTitle, editedDescription, editedCom
                 p: 4,
             }}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                    Edit Task
+                    Edit Post
                 </Typography>
                 <TextField
                     label="Title"
@@ -34,25 +34,15 @@ const UpdateTask = ({ isOpen, onClose, editedTitle, editedDescription, editedCom
                     sx={{ mt: 2 }}
                 />
                 <TextField
-                    label="Description"
-                    value={editedDescription}
-                    onChange={onDescriptionChange}
+                    label="Body"
+                    value={editedBody}
+                    onChange={onBodyChange}
                     fullWidth
                     multiline
                     rows={4}
                     variant="outlined"
                     sx={{ mt: 2 }}
                 />
-                <Typography sx={{ mt: 2 }}> Complete Status:
-                    <Button
-                        variant={editedComplete ? 'contained' : 'outlined'}
-                        color="primary"
-                        onClick={onCompleteChange}
-                        sx={{ mr: 1, mt: 1 }}
-                    >
-                        {editedComplete ? 'Completed' : 'Awaiting'}
-                    </Button>
-                </Typography>
                 <Button onClick={onSaveChanges}>Save Changes</Button>
                 <Button onClick={onClose}>Cancel</Button>
             </Box>
@@ -60,4 +50,4 @@ const UpdateTask = ({ isOpen, onClose, editedTitle, editedDescription, editedCom
     );
 };
 
-export default UpdateTask;
+export default UpdatePost;

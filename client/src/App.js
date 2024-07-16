@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import TaskList from './tasks/TaskList';
 import AddTask from './tasks/AddTask';
 import Layout from './common/Layout';
+import PostList from './posts/PostList';
+import AddPost from './posts/AddPost';
 
 function App() {
   return (
@@ -17,7 +19,9 @@ function App() {
             you have {} photos and {} posts at your library
             enjoy connecting! */}
             <Route path='/tasks' element={<TaskList />} />
+            <Route path='/posts' element={<PostList />} />
             <Route path='/tasks/add' element={<AddTask />} />
+            <Route path='/posts/add' element={<AddPost />} />
           </Route>
         </Routes>
       </Router>

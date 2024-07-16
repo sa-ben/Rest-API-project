@@ -62,7 +62,7 @@ const TasksList = () => {
                     </select>
                 </div>
                 <input className="inpSearch" placeholder="search" onChange={(e) => setFilterValue(e.target.value)} />
-                <button className="btnAddNewTask"> <Link style={{ color: "white" }} to='/tasks/add'> Add new task</Link> </button>
+                <button className="btnAddNew"> <Link style={{ color: "white" }} to='/tasks/add'> Add new task</Link> </button>
             </div>
             <h1> Tasks List </h1>
             {/* <Link to='/tasks/add'> Add new task</Link> */}

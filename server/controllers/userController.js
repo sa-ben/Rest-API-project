@@ -25,7 +25,8 @@ const createUser = async (req, res) => {
 
 //update a user
 const updateUser = async (req, res) => {
-    const { id, username, name, email, address, phone } = req.body
+    const { id } = req.params
+    const { username, name, email, address, phone } = req.body
     if (!id || !username || !name) return res.status(400).send("some required field/s are missing")
     //find the wanted user
     const user = await User.findById(id).exec()
