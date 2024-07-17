@@ -61,6 +61,7 @@
 // };
 
 // export default UpdateTask;
+
 import React from 'react';
 import Modal from '@mui/material/Modal';
 import { Box, Button, TextField, Typography } from '@mui/material';
@@ -126,6 +127,7 @@ const UpdateTask = ({ isOpen, onClose, editedTitle, editedDescription, editedCom
                     Complete Status:
                     <Button
                         variant='outlined'
+                        size='small'
                         onClick={onCompleteChange}
                         sx={{ ml: 2 }}
                         style={buttonStyles}

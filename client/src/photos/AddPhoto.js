@@ -2,20 +2,18 @@
 // import Axios from "axios";
 // import { useNavigate } from "react-router-dom";
 
-// const AddTask = () => {
+// const AddPost = () => {
 //     const [title, setTitle] = useState("");
-//     const [description, setDescription] = useState("")
-//     const [dueDate, setDueDate] = useState(new Date().toISOString().slice(0, 16))
+//     const [body, setBody] = useState("")
 //     const navigate = useNavigate();
 
 //     const submitForm = async (e) => {
 //         e.preventDefault();
 //         try {
-//             const { data } = await Axios.post("http://localhost:5600/api/tasks", { title, description });
+//             const { data } = await Axios.post("http://localhost:5600/api/posts", { title, body });
 //             setTitle("");
-//             setDescription("")
-//             setDueDate(new Date().toISOString().slice(0, 16));
-//             navigate("/tasks");
+//             setBody("")
+//             navigate("/posts");
 //             console.log(data);
 //         } catch (error) {
 //             console.error("Error submitting the form:", error);
@@ -31,43 +29,34 @@
 //                 onChange={(e) => setTitle(e.target.value)}
 //             />
 //             <input
-//                 value={description}
-//                 placeholder="descriprion"
-//                 onChange={(e) => setDescription(e.target.value)}
-//             />
-//             <input
-//                 // type="datetime-local"
-//                 value={dueDate}
-//                 placeholder="due date"
-//                 onChange={(e) => setDueDate(e.target.value)}
+//                 value={body}
+//                 placeholder="body"
+//                 onChange={(e) => setBody(e.target.value)}
 //             />
 //             <button type="submit" disabled={title === ""}>Send</button>
 //         </form>
 //     );
 // };
 
-// export default AddTask;
-
+// export default AddPost;
 
 import React, { useState } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, TextField, Typography } from "@mui/material";
 
-const AddTask = () => {
+const AddPhoto = () => {
     const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [dueDate, setDueDate] = useState(new Date().toISOString().slice(0, 16));
+    const [imageUrl, setImageUrl] = useState(""); 
     const navigate = useNavigate();
 
     const submitForm = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await Axios.post("http://localhost:5600/api/tasks", { title, description });
+            const { data } = await Axios.post("http://localhost:5600/api/photos", { title, imageUrl });
             setTitle("");
-            setDescription("");
-            setDueDate(new Date().toISOString().slice(0, 16));
-            navigate("/tasks");
+            setImageUrl("");
+            navigate("/photos");
             console.log(data);
         } catch (error) {
             console.error("Error submitting the form:", error);
@@ -88,7 +77,7 @@ const AddTask = () => {
             borderRadius: '15px'
         }}>
             <Typography variant="h6" component="h2" align="center" color="rgb(155, 21, 59)">
-                Add Task
+                Add New Photo
             </Typography>
             <form onSubmit={submitForm}>
                 <TextField
@@ -101,21 +90,13 @@ const AddTask = () => {
                     sx={{ mt: 2 }}
                 />
                 <TextField
-                    label="Description"
-                    value={description}
-                    placeholder="Description"
+                    label="Image URL"
+                    value={imageUrl}
+                    placeholder="image URL"
                     multiline
                     rows={4}
                     fullWidth
-                    onChange={(e) => setDescription(e.target.value)}
-                    sx={{ mt: 2 }}
-                />
-                <TextField
-                    label="Due Date"
-                    value={dueDate}
-                    type="date"
-                    fullWidth
-                    onChange={(e) => setDueDate(e.target.value)}
+                    onChange={(e) => setImageUrl(e.target.value)}
                     sx={{ mt: 2 }}
                 />
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
@@ -130,8 +111,8 @@ const AddTask = () => {
                 </Box>
             </form>
         </Box>
-        
     );
 };
 
-export default AddTask;
+export default AddPhoto;
+

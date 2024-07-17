@@ -2,10 +2,8 @@ import { useEffect, useState } from "react"
 import Axios from 'axios'
 import { Link } from 'react-router-dom'
 import PostItem from "./PostItem"
-import { FiFilter } from "react-icons/fi";
 
-
-const PostList = () => {
+const PostsList = () => {
     const [posts, setPosts] = useState([])
     const [sortBy, setSortBy] = useState('')
     const [filterValue, setFilterValue] = useState('')
@@ -13,7 +11,7 @@ const PostList = () => {
     const fetchPosts = async () => {
         try {
             const { data } = await Axios.get("http://localhost:5600/api/posts");
-            const filteredData = data.filter(el => el.title.includes(filterValue)) // Filter by 'title' containing the entered text
+            const filteredData = data.filter(el => el.title.toLowerCase().includes(filterValue)) // Filter by 'title' containing the entered text
             setPosts(filteredData)
         } catch (error) {
             console.error("Failed to fetch posts:", error);
@@ -61,11 +59,11 @@ const PostList = () => {
             </div>
             <h1> Posts List </h1>
             {(posts.length) ?
-                posts.map((post, index) => <PostItem key={post._id} post={post} fetchPosts={fetchPosts} sortBy={sortBy} sortPosts={sortPosts} />)
-                : <h2> No posts found </h2>
+                posts.map((post) => <PostItem key={post._id} post={post} fetchPosts={fetchPosts} sortBy={sortBy} sortPosts={sortPosts} />)
+                : <h2 style={{width:"72vw"}}> No posts found </h2>
             }
         </div>
     </>
 }
 
-export default PostList
+export default PostsList

@@ -17,7 +17,7 @@ const TasksList = () => {
     const fetchTasks = async () => {
         try {
             const { data } = await Axios.get("http://localhost:5600/api/tasks");
-            const filteredData = data.filter(el => el.title.includes(filterValue)) // Filter by 'title' containing the entered text
+            const filteredData = data.filter(el => el.title.toLowerCase().includes(filterValue)) // Filter by 'title' containing the entered text
             setTasks(filteredData)
         } catch (error) {
             console.error("Failed to fetch tasks:", error);
@@ -77,7 +77,7 @@ const TasksList = () => {
             <h1> Tasks List </h1>
             {(tasks.length) ?
                 tasks.map((task, index) => <TaskItem key={task._id} task={task} fetchTasks={fetchTasks} sortBy={sortBy} sortTasks={sortTasks} />)
-                : <h2> No tasks found </h2>
+                : <h2 style={{width:"72vw"}}> No tasks found </h2>
             }
             {/* <AddTask isOpen={openModal} onClose={handleClose} />  */}
         </div>

@@ -7,7 +7,8 @@ const photoSchema = new mongoose.Schema({
         default: "No name"
     },
     imageUrl:{
-        type:String
+        type:String,
+        required: true,
     }
 }, {
     timestamps: true
