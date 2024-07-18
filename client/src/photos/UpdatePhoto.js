@@ -7,13 +7,15 @@ const UpdatePhoto = ({ isOpen, onClose, editedTitle, editedImageUrl, onTitleChan
     const buttonStyles = {
         borderColor: 'rgb(155, 21, 59)',
         color: 'rgb(155, 21, 59)',
-        borderRadius: '10px'
+        borderRadius: '10px',
+        textTransform: 'none'
     };
 
     const saveButtonStyles = {
         bgcolor: '#4CAF50', 
         color: 'white', 
         borderRadius: '10px',
+        textTransform: 'none',
         '&:hover': {
             bgcolor: 'rgb(155, 21, 59)'
         }
@@ -23,8 +25,6 @@ const UpdatePhoto = ({ isOpen, onClose, editedTitle, editedImageUrl, onTitleChan
         <Modal
             open={isOpen}
             onClose={onClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-body"
         >
             <Box sx={{
                 position: 'absolute',
@@ -38,8 +38,8 @@ const UpdatePhoto = ({ isOpen, onClose, editedTitle, editedImageUrl, onTitleChan
                 p: 4,
                 borderRadius: '15px'
             }}>
-                <Typography id="modal-modal-title" variant="h6" component="h2" align="center" color={'rgb(155, 21, 59)'}>
-                    Edit Photo
+                <Typography variant="h7" component="h2" align="center" color={'rgb(155, 21, 59)'}>
+                    Update Photo
                 </Typography>
                 <TextField
                     label="Title"

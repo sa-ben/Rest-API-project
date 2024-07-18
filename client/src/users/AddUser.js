@@ -6,6 +6,7 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 const AddUser = () => {
     const [username, setUsername] = useState("");
     const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");
@@ -14,10 +15,11 @@ const AddUser = () => {
     const submitForm = async (e) => {
         e.preventDefault();
         try {
-            const userData = { username, name, email, address, phone };
+            const userData = { username, name, password, email, address, phone };
             const { data } = await Axios.post("http://localhost:5600/api/users", userData);
             setUsername("");
             setName("");
+            setPassword("")
             setEmail("");
             setAddress("");
             setPhone("");
@@ -63,10 +65,20 @@ const AddUser = () => {
                     onChange={(e) => setName(e.target.value)}
                     sx={{ mt: 2 }}
                 />
+                  <TextField
+                    label="Password"
+                    value={password}
+                    placeholder="Password"
+                    required
+                    fullWidth
+                    onChange={(e) => setName(e.target.value)}
+                    sx={{ mt: 2 }}
+                />
                 <TextField
                     label="Email"
                     value={email}
                     placeholder="Email"
+                    required
                     fullWidth
                     onChange={(e) => setEmail(e.target.value)}
                     sx={{ mt: 2 }}

@@ -22,21 +22,12 @@ const TaskItem = ({ task, fetchTasks, sortTasks }) => {
 
     const completeTask = async () => {
         try {
-            const { data } = await Axios.put(`http://localhost:5600/api/tasks/${task._id}`, { ...task, complete: !task.complete })
+            const { data } = await Axios.put(`http://localhost:5600/api/tasks/${task._id}`,
+                { ...task, complete: !task.complete })
             fetchTasks()
             console.log(data)
         } catch (error) {
             console.error("Error updating task:", error)
-        }
-    }
-
-    const updateCompleteStatus = async () => {
-        try {
-            const { data } = await Axios.put(`http://localhost:5600/api/tasks/${task._id}`, { ...task, complete: !editedComplete });
-            fetchTasks();
-            console.log(data);
-        } catch (error) {
-            console.error("Error updating complete status:", error);
         }
     }
 
@@ -65,21 +56,39 @@ const TaskItem = ({ task, fetchTasks, sortTasks }) => {
     };
 
     return <div className="task_item">
-        <p className="p_id"> id: {task._id}</p>
-        <h2 className={task.complete ? "title_completed" : "title_complete"}> {task.title} </h2>
-        <p className="p_description"> {task.description} </p>
-        <p> {task.dueDate ? new Date(task.dueDate).toLocaleDateString('en-GB') : ''} </p>
-        <p className={task.complete ? "p_completed" : "p_complete"}> {task.complete ? 'completed' : 'awaiting to be done'} </p>
+        <p className="p_timestamp">
+            Created at: {new Date(task.createdAt).toLocaleString()}
+        </p>
+        <p className="p_id">
+            id: {task._id}
+        </p>
+        <h2 className={task.complete && "title_completed"}>
+            {task.title}
+        </h2>
+        <p className="p_description">
+            {task.description}
+        </p>
+        <p style={{fontWeight:"350"}}>
+            {task.dueDate ? `Due Date: ${new Date(task.dueDate).toLocaleDateString('en-GB')}` : ''}
+        </p>
+        <p className={task.complete ? "p_completed" : "p_complete"}>
+            {task.complete ? 'completed' : 'awaiting to be done'}
+        </p>
         <div className="div_buttons">
-            <button className="btn_delete" title="delete task" onClick={deleteTask}>
+            <button
+                className="btn_delete"
+                title="delete task"
+                onClick={deleteTask}>
                 <MdDelete />
             </button>
-            <button className="btn_edit"
+            <button
+                className="btn_edit"
                 title="edit task"
                 onClick={handleEditOpen}>
                 <MdOutlineEdit />
             </button>
-            <button className={task.complete ? "btn_completed" : "btn_complete"}
+            <button
+                className={task.complete ? "btn_completed" : "btn_complete"}
                 title="complete task"
                 onClick={completeTask}
                 disabled={task.complete}>

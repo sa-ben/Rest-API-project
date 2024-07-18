@@ -89,6 +89,10 @@ section {
   padding: 3vh 0 4vh 0;
 }
 
+.photos_header {
+  width: 72vw;
+}
+
 .inpSearch {
   height: 35px;
   width: 30%;
@@ -138,6 +142,9 @@ section {
   border: none;
   background-color: beige;
   /* background-color: rgb(155, 21, 59); */
+  color: rgb(155, 21, 59);
+  font-weight: 500;
+  font-size: medium;
   box-shadow: 3px 2px 4px grey;
   width: 15%;
   height: 40px;
@@ -167,12 +174,31 @@ section {
   position: relative;
 }
 
-.potos_display{
+.p_timestamp {
+  color: rgb(155, 21, 59);
+  font-weight: 500;
+  font-size: small;
+  margin: 10px 20px;
+  position: absolute;
+  top: 4px;
+  right: 0;
+}
+
+.p_id {
+  font-size: small;
+  margin: 5px 20px;
+  position: absolute;
+  top: none;
+  bottom: 4px;
+  right: 0;
+}
+
+.potos_display {
   display: flex;
   flex-wrap: wrap;
 }
 
-.photo_item{
+.photo_item {
   width: 30vw;
   padding: 5px;
   margin: 10px 40px;
@@ -180,7 +206,7 @@ section {
   /* border-bottom: none; */
 }
 
-.photo_item_2{
+.photo_item_2 {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -191,12 +217,9 @@ section {
   /* background-color: rgb(175, 239, 79); */
 }
 
-.p_id {
+.p_id_image {
+  margin: 5px 0 0 0;
   font-size: small;
-  margin: 0;
-  position: absolute;
-  top: 4px;
-  right: 0;
 }
 
 .div_buttons {

@@ -15,7 +15,7 @@ const getPhotoById = async (req, res) => {
 const createPhoto = async (req, res) => {
     const { title, imageUrl } = req.body
     if (!title || !imageUrl) return res.status(400).send("fields are required")
-    const photo = await Photo.create({ title, imageUrl:`/public/${imageUrl}` })
+    const photo = await Photo.create({ title, imageUrl })
     if (!photo) return res.status(404).send("could not create a new photo")
     res.json(photo)
 }
@@ -25,8 +25,8 @@ const updatePhoto = async (req, res) => {
     const { title, imageUrl } = req.body
     if (!id || !title || !imageUrl) return res.status(400).send("id and other fields are required")
     const photo = await Photo.findById(id).exec()
-    post.title = title
-    post.imageUrl = imageUrl
+    photo.title = title
+    photo.imageUrl = imageUrl
     const newPhoto = await photo.save()
     res.json(newPhoto)
 }

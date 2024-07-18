@@ -22,7 +22,7 @@ app.use("/api/tasks", require("./routes/taskRoute"))
 app.use("/api/users", require("./routes/userRoute"))
 app.use("/api/posts", require("./routes/postRoute"))
 app.use("/api/photos", require("./routes/photoRoute"))
-
+app.use("/api/auth", require("./routes/authRoute"))
 
 
 mongoose.connection.once('open', () => {

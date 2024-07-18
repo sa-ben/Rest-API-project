@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react"
 import Axios from 'axios'
-import { Link } from 'react-router-dom'
 import PostItem from "./PostItem"
+import AddPost from './AddPost'
 
 const PostsList = () => {
+
+    const [openModal, setOpenModal] = useState(false)
     const [posts, setPosts] = useState([])
     const [sortBy, setSortBy] = useState('')
     const [filterValue, setFilterValue] = useState('')
+
+    const handleOpenModal = () => setOpenModal(true)
+    const handleCloseModal = () => setOpenModal(false)
 
     const fetchPosts = async () => {
         try {
@@ -42,26 +47,45 @@ const PostsList = () => {
         sortPosts(sortBy)
     }, [sortBy])
 
-    // if (posts.length === 0) return <h1>Loading</h1>
-
     return <>
         <div className="postsList">
             <div className="posts_header">
                 <div className="div_sort">
-                    <select className="selectList" onChange={(e) => setSortBy(e.target.value)}>
+                    <select
+                        className="selectList"
+                        onChange={(e) => setSortBy(e.target.value)}
+                    >
                         <option value="id"> id </option>
                         <option value="alphabeta"> a-z </option>
                         <option value="random"> random </option>
                     </select>
                 </div>
-                <input className="inpSearch" placeholder="search" onChange={(e) => setFilterValue(e.target.value)} />
-                <button className="btnAddNew"> <Link className="linkBtn" to='/posts/add'> Add new post </Link> </button>
+                <input
+                    className="inpSearch"
+                    placeholder="search"
+                    onChange={(e) => setFilterValue(e.target.value)}
+                />
+                <button className="btnAddNew" onClick={handleOpenModal}>
+                    Add Post
+                </button>
             </div>
             <h1> Posts List </h1>
             {(posts.length) ?
-                posts.map((post) => <PostItem key={post._id} post={post} fetchPosts={fetchPosts} sortBy={sortBy} sortPosts={sortPosts} />)
-                : <h2 style={{width:"72vw"}}> No posts found </h2>
+                posts.map((post) =>
+                    <PostItem
+                        key={post._id}
+                        post={post}
+                        fetchPosts={fetchPosts}
+                        sortBy={sortBy}
+                        sortPosts={sortPosts}
+                    />)
+                : <h2 style={{ width: "72vw" }}> No posts found </h2>
             }
+            <AddPost
+                isOpen={openModal}
+                onClose={handleCloseModal}
+                fetchPosts={fetchPosts}
+            />
         </div>
     </>
 }

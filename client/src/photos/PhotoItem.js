@@ -7,7 +7,7 @@ const PhotoItem = ({ photo, fetchPhotos }) => {
 
     const [openModal, setOpenModal] = useState(false)
     const [editedTitle, setEditedTitle] = useState(photo.title)
-    const [editedimageUrl, setEditedImageUrl] = useState(photo.body)
+    const [editedImageUrl, setEditedImageUrl] = useState(photo.imageUrl)
 
     const deletePhoto = async () => {
         const { data: responseData } = await Axios.delete("http://localhost:5600/api/photos", {
@@ -28,7 +28,7 @@ const PhotoItem = ({ photo, fetchPhotos }) => {
             const { data } = await Axios.put(`http://localhost:5600/api/photos/${photo._id}`, {
                 ...photo,
                 title: editedTitle,
-                imageUrl: editedimageUrl,
+                imageUrl: editedImageUrl,
             });
             fetchPhotos();
             // sortPhotos("alphabeta");
@@ -40,28 +40,28 @@ const PhotoItem = ({ photo, fetchPhotos }) => {
     };
 
     return <div className="photo_item">
-        <p className="p_id"> id: {photo._id}</p>
-
         <div className="photo_item_2">
-            <h2 style={{marginBottom:"0"}}> {photo.title} </h2>
-            <img src={photo.imageUrl} alt={photo.title} style={{ width: "350px", height: "250px", marginBottom:"5px"}} />
+            <h2 style={{ margin: "5px" }}> {photo.title} </h2>
+            <img src={photo.imageUrl} alt={photo.title} style={{ width: "350px", height: "250px", marginBottom: "5px" }} />
             <div className="div_buttons">
                 <button className="btn_delete" title="delete photo" onClick={deletePhoto}>
                     <MdDelete />
                 </button>
                 <button className="btn_edit"
-                    title="edit photo"
+                    title="update photo"
                     onClick={handleEditOpen}>
                     <MdOutlineEdit />
                 </button>
             </div>
+            <p className="p_id_image"> id: {photo._id}</p>
+            {/* <p className="p_timestamp"> Created at: {new Date(photo.createdAt).toLocaleString()} </p> */}
         </div>
         <UpdatePhoto
             isOpen={openModal}
             onClose={handleEditClose}
             photo={photo}
             editedTitle={editedTitle}
-            editedimageUrl={editedimageUrl}
+            editedImageUrl={editedImageUrl}
             onTitleChange={handleTitleChange}
             onImageUrlChange={handleImageUrlChange}
             onSaveChanges={handleSaveChanges}

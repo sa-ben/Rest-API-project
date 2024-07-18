@@ -40,9 +40,10 @@ const PostItem = ({ post, fetchPosts }) => {
     };
 
     return <div className="post_item">
-        <p className="p_id"> id: {post._id}</p>
+        <p className="p_timestamp"> Created at: {new Date(post.createdAt).toLocaleString()} </p>
         <h2> {post.title} </h2>
         <p> {post.body}</p>
+        <p className="p_id"> id: {post._id}</p>
         <div className="div_buttons">
             <button className="btn_delete" title="delete post" onClick={deletePost}>
                 <MdDelete />

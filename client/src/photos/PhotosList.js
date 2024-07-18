@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react"
 import Axios from 'axios'
-import { Link } from 'react-router-dom'
 import PhotoItem from "./PhotoItem"
+import AddTask from "./AddPhoto"
 
 const PhotosList = () => {
+
+    const [openModal, setOpenModal] = useState(false)
     const [photos, setPhotos] = useState([])
     const [sortBy, setSortBy] = useState('')
     const [filterValue, setFilterValue] = useState('')
+
+    const handleOpenModal = () => setOpenModal(true)
+    const handleCloseModal = () => setOpenModal(false)
 
     const fetchPhotos = async () => {
         try {
@@ -46,21 +51,42 @@ const PhotosList = () => {
         <div className="photosList">
             <div className="photos_header">
                 <div className="div_sort">
-                    <select className="selectList" onChange={(e) => setSortBy(e.target.value)}>
+                    <select
+                        className="selectList"
+                        onChange={(e) => setSortBy(e.target.value)}
+                    >
                         <option value="id"> id </option>
                         <option value="alphabeta"> a-z </option>
                         <option value="random"> random </option>
                     </select>
                 </div>
-                <input className="inpSearch" placeholder="search" onChange={(e) => setFilterValue(e.target.value)} />
-                <button className="btnAddNew"> <Link className="linkBtn" to='/photos/add'> Add new photo </Link> </button>
+                <input
+                    className="inpSearch"
+                    placeholder="search"
+                    onChange={(e) => setFilterValue(e.target.value)}
+                />
+                <button className="btnAddNew" onClick={handleOpenModal}>
+                    Add Photo
+                </button>
             </div>
-            <h1> Photos </h1>
+            <h1 style={{ width: "70vw" }}> Photos </h1>
             <div className="potos_display">
                 {(photos.length) ?
-                    photos.map((photo) => <PhotoItem key={photo._id} photo={photo} fetchPhotos={fetchPhotos} sortBy={sortBy} sortPhotos={sortPhotos} />)
+                    photos.map((photo) =>
+                        <PhotoItem
+                            key={photo._id}
+                            photo={photo}
+                            fetchPhotos={fetchPhotos}
+                            sortBy={sortBy}
+                            sortPhotos={sortPhotos}
+                        />)
                     : <h2 style={{ width: "72vw" }}> No photos found </h2>
                 }
+                <AddTask
+                    isOpen={openModal}
+                    onClose={handleCloseModal}
+                    fetchPhotos={fetchPhotos}
+                />
             </div>
         </div>
     </>

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import Axios from 'axios'
-import { Link } from 'react-router-dom'
 import TaskItem from "./TaskItem"
 import AddTask from "./AddTask"
 
@@ -11,8 +10,8 @@ const TasksList = () => {
     const [sortBy, setSortBy] = useState('')
     const [filterValue, setFilterValue] = useState('')
 
-    const handleOpen = () => setOpenModal(true)
-    const handleClose = () => setOpenModal(false)
+    const handleOpenModal = () => setOpenModal(true)
+    const handleCloseModal = () => setOpenModal(false)
 
     const fetchTasks = async () => {
         try {
@@ -22,7 +21,7 @@ const TasksList = () => {
         } catch (error) {
             console.error("Failed to fetch tasks:", error);
         }
-    };
+    }
 
     useEffect(() => {
         fetchTasks()
@@ -40,7 +39,19 @@ const TasksList = () => {
                 tasks.sort(() => Math.random() - 0.5);
                 break;
             case "date":
-                tasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+                // tasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+                tasks.sort((a, b) => {
+                    const dateA = new Date(a.dueDate);
+                    const dateB = new Date(b.dueDate);
+                    if (!a.dueDate) return 1;
+                    if (!b.dueDate) return -1;
+                    if (!isNaN(dateA) && !isNaN(dateB)) {
+                        return dateA - dateB;
+                    }
+                    if (isNaN(dateA)) return 1;
+                    if (isNaN(dateB)) return -1;    
+                    return 0;
+                });
                 break;
             default:
                 tasks.sort((a, b) => a._id.localeCompare(b._id));
@@ -49,20 +60,19 @@ const TasksList = () => {
         console.log(`sorted by ${sortBy} successfully`);
         setTasks([...tasks]);
     };
-    
-
 
     useEffect(() => {
         sortTasks(sortBy)
     }, [sortBy])
 
-    // if (tasks.length === 0) return <h1>Loading</h1>
-
     return <>
         <div className="tasksList">
             <div className="tasks_header">
                 <div className="div_sort">
-                    <select className="selectList" onChange={(e) => setSortBy(e.target.value)}>
+                    <select
+                        className="selectList"
+                        onChange={(e) => setSortBy(e.target.value)}
+                    >
                         <option value="id"> id </option>
                         <option value="alphabeta"> a-z </option>
                         <option value="completed"> completed </option>
@@ -70,16 +80,32 @@ const TasksList = () => {
                         <option value="date"> date </option>
                     </select>
                 </div>
-                <input className="inpSearch" placeholder="search" onChange={(e) => setFilterValue(e.target.value)} />
-                <button className="btnAddNew"> <Link className="linkBtn" to='/tasks/add'> Add new task</Link> </button>
-                {/* <button className="btnAddNew" onClick={handleOpen}> Add new task </button> */}
+                <input
+                    className="inpSearch"
+                    placeholder="search"
+                    onChange={(e) => setFilterValue(e.target.value)}
+                />
+                <button className="btnAddNew" onClick={handleOpenModal}>
+                    Add Task
+                </button>
             </div>
             <h1> Tasks List </h1>
             {(tasks.length) ?
-                tasks.map((task, index) => <TaskItem key={task._id} task={task} fetchTasks={fetchTasks} sortBy={sortBy} sortTasks={sortTasks} />)
-                : <h2 style={{width:"72vw"}}> No tasks found </h2>
+                tasks.map((task, index) =>
+                    <TaskItem
+                        key={task._id}
+                        task={task}
+                        fetchTasks={fetchTasks}
+                        sortBy={sortBy}
+                        sortTasks={sortTasks}
+                    />)
+                : <h2 style={{ width: "72vw" }}> No tasks found </h2>
             }
-            {/* <AddTask isOpen={openModal} onClose={handleClose} />  */}
+            <AddTask
+                isOpen={openModal}
+                onClose={handleCloseModal}
+                fetchTasks={fetchTasks}
+            />
         </div>
     </>
 }

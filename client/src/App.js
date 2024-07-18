@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import TaskList from './tasks/TasksList';
-import AddTask from './tasks/AddTask';
+import AddTask from './tasks/AddTask - to delete';
 import Layout from './common/Layout';
 import PostsList from './posts/PostsList';
 import AddPost from './posts/AddPost';
@@ -27,10 +27,10 @@ function App() {
             <Route path='/posts' element={<PostsList />} />
             <Route path='/users' element={<UsersList />} />
             <Route path='/photos' element={<PhotosList />} />
-            <Route path='/tasks/add' element={<AddTask />} />
+            {/* <Route path='/tasks/add' element={<AddTask />} />
             <Route path='/posts/add' element={<AddPost />} />
             <Route path='/users/add' element={<AddUser />} />
-            <Route path='/photos/add' element={<AddPhoto />} />
+            <Route path='/photos/add' element={<AddPhoto />} /> */}
           </Route>
         </Routes>
       </Router>
